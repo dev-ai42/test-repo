@@ -20,12 +20,12 @@ newpasswd=P@ssword1234!
 #done
 
 #create groups
-for i in "${!names[@]}"; do
+for i in "${!groups[@]}"; do
     sudo groupadd "${groups[i]}"
 done
 
 #create user with password and add to right group(s)
-for i in "${!roles[@]}"; do
+for i in "${!names[@]}"; do
     sudo useradd "${names[i]}"
     echo "${names[i]}:$newpasswd" | sudo chpasswd
     sudo usermod -a -G Personnel "${names[i]}"
