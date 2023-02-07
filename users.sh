@@ -20,7 +20,7 @@ newpasswd=P@ssword1234!
 #done
 
 #create groups
-for i in "${!groups[@]}"; do
+for i in "${!names[@]}"; do
     sudo groupadd "${groups[i]}"
 done
 
