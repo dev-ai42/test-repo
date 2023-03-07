@@ -26,7 +26,13 @@ body {
     text-align: center;
     color: #202124;
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 500;
+}
+
+.box span {
+    padding-right: 10px;
+    font-size: 21px;
+    line-height: 1;
 }
 
 .box .logo {
@@ -39,7 +45,7 @@ body {
 .box p {
     font-size: 16px;
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     line-height: 1.5;
     margin-bottom: 24px;
     text-align: center;
@@ -62,7 +68,7 @@ body {
  
 .box .inputBox label {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 10px;
     padding: 0.625rem 0;
     font-size: 1rem;
