@@ -61,7 +61,7 @@ instance_id=$(aws ec2 run-instances \
 
 #echo $instance_id
 #aws ec2 wait instance-status-ok --instance-ids $instance_id
-sleep 15
+sleep 25
 
 read -r instance_id pub_ip <<< $(aws ec2 describe-instances \
     --filters "Name=instance-state-name,Values=running" \
