@@ -18,11 +18,6 @@ sg_id=$(aws ec2 create-security-group \
         --vpc-id $vpc_id \
         --output "text")
 
-sg_id=$(aws ec2 describe-security-groups \
-        --group-name "webserver-sg" \
-        --query "SecurityGroups[*].GroupId" \
-        --output "text")
-
 echo "New security group ID: $sg_id"
 echo
 
@@ -31,15 +26,13 @@ aws ec2 authorize-security-group-ingress \
     --group-id $sg_id \
     --protocol "tcp" \
     --port 80 \
-    --cidr "0.0.0.0/0" \
-    --output "text" > /dev/null
+    --cidr "0.0.0.0/0"  > /dev/null
 
 aws ec2 authorize-security-group-ingress \
     --group-id $sg_id \
      --protocol "tcp" \
      --port 22 \
-     --cidr "0.0.0.0/0" \
-     --output "text" > /dev/null
+     --cidr "0.0.0.0/0"  > /dev/null
 echo "$sg_id now allows HTTP traffic on port 80 and SSH on port 22 from 0.0.0.0/0"
 echo
 
@@ -57,10 +50,10 @@ instance_id=$(aws ec2 run-instances \
     --query "Instances[*].[InstanceId]" \
     --output "text")
 
-#wait until status checks pass takes too long, just wait 25s
+#wait until status checks pass takes too long, just wait 20s
 #makes sure server is created and running by time script is done
 #aws ec2 wait instance-status-ok --instance-ids $instance_id 
-sleep 25
+sleep 20
 
 read -r instance_id pub_ip <<< $(aws ec2 describe-instances \
     --filters "Name=instance-state-name,Values=running" \
