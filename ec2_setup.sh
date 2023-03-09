@@ -43,8 +43,6 @@ aws ec2 authorize-security-group-ingress \
 echo "$sg_id now allows HTTP traffic on port 80 and SSH on port 22 from 0.0.0.0/0"
 echo
 
-
-#aws ec2 describe-security-groups
 echo "Launching EC2 instance and setting up server..."
 instance_id=$(aws ec2 run-instances \
     --image-id resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 \
@@ -59,8 +57,9 @@ instance_id=$(aws ec2 run-instances \
     --query "Instances[*].[InstanceId]" \
     --output "text")
 
-#echo $instance_id
-#aws ec2 wait instance-status-ok --instance-ids $instance_id
+#wait until status checks pass takes too long, just wait 25s
+#makes sure server is created and running by time script is done
+#aws ec2 wait instance-status-ok --instance-ids $instance_id 
 sleep 25
 
 read -r instance_id pub_ip <<< $(aws ec2 describe-instances \
@@ -71,6 +70,6 @@ read -r instance_id pub_ip <<< $(aws ec2 describe-instances \
 echo "Instance $instance_id was created with Public IP $pub_ip and an HTTP server listening on port 80"
 
 
-#Delete terminate instance and delete security group for cleanup
+#Terminate instance and delete security group for cleanup
 #aws ec2 terminate-instances --instance-ids $instance_id
 #aws ec2 delete-security-group --group-id $sg_id
