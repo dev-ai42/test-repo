@@ -70,8 +70,7 @@ read -r instance_id pub_ip <<< $(aws ec2 describe-instances \
 
 echo "Instance $instance_id was created with Public IP $pub_ip and an HTTP server listening on port 80"
 
+
+#Delete terminate instance and delete security group for cleanup
+#aws ec2 terminate-instances --instance-ids $instance_id
 #aws ec2 delete-security-group --group-id $sg_id
-
-
-
-
